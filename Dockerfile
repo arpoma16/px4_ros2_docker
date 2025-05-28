@@ -18,9 +18,6 @@ RUN sudo apt-get install -y lsb-release
 RUN sudo apt-get install -y gnupg
 RUN sudo apt-get install -y wget
 
-RUN useradd -ms /bin/bash grvc
-RUN echo "grvc ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/grvc
-USER grvc
 # Install PX4 v1.16-alpha1
 
 WORKDIR /home/grvc/
@@ -92,20 +89,8 @@ RUN sudo echo "source /home/grvc/px4msgs_ws/install/setup.bash" >> /home/grvc/.b
 
 # RUN sudo apt install ros-humble-ros-gz
 
-RUN sudo usermod -a -G dialout grvc
-RUN sudo apt-get remove modemmanager -y
-RUN sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
-RUN sudo apt install libfuse2 -y
 
 
-RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y 
-
-WORKDIR /home/grvc
-RUN sudo wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
-
-RUN sudo apt install fuse
-
-RUN sudo chmod +x QGroundControl.AppImage
 
 # Set up
 

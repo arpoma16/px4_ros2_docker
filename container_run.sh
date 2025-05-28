@@ -5,7 +5,7 @@ export IMAGE_NAME="px4_ros2"
 
 
 xhost +local:docker;
-export DISPLAY=:0
+
 PROJECT_DIR="/root";
 PROJECT_DIST="/root";
 
@@ -19,8 +19,8 @@ if [ "$(docker ps -qaf name=$CONTAINER_NAME)" = "" ]; then
     --env DISPLAY=$DISPLAY \
     --network host \
     --ipc=host \
+
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
-    --volume /mnt/wslg:/mnt/wslg \
     $IMAGE_NAME bash;
 
     echo 'Container created.';
