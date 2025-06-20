@@ -18,10 +18,7 @@ RUN sudo apt-get install -y lsb-release
 RUN sudo apt-get install -y gnupg
 RUN sudo apt-get install -y wget
 
-RUN useradd -ms /bin/bash grvc
-RUN echo "grvc ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/grvc
-USER grvc
-# Install PX4 v1.16-alpha1
+RUN mkdir -p /home/grvc/
 
 WORKDIR /home/grvc/
 RUN ls
@@ -83,39 +80,5 @@ WORKDIR /home/grvc/px4msgs_ws
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 
 RUN sudo echo "source /home/grvc/px4msgs_ws/install/setup.bash" >> /home/grvc/.bashrc
-
-# Install Bridge Ros - Gz
-
-# RUN sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
-# RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-# RUN sudo apt-get update
-
-# RUN sudo apt install ros-humble-ros-gz
-
-RUN sudo usermod -a -G dialout grvc
-RUN sudo apt-get remove modemmanager -y
-RUN sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
-RUN sudo apt install libfuse2 -y
-
-
-RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y 
-
-WORKDIR /home/grvc
-RUN sudo wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
-
-RUN sudo apt install fuse
-
-RUN sudo chmod +x QGroundControl.AppImage
-
-# Set up
-
-RUN sudo apt-get install -y tmux
-RUN sudo apt-get install -y tmuxinator
-RUN sudo apt-get install -y vim
-
-RUN echo 'export PS1="🤖\[\e[38;5;141m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;197m\]\$ \[\e[0m\]"' >> /home/grvc/.bashrc
-
-RUN echo ":set number relativenumber" >> /home/grvc/.vimrc
-
 
 
