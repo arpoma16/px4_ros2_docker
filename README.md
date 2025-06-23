@@ -30,8 +30,11 @@ This will generate a Docker image with the necessary dependencies for working wi
 To start an interactive container based on the generated image, run:
 
 ```bash
-bash containerWSL_run.sh 
+bash ./containerWSL_run.sh 
+PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 1
+MicroXRCEAgent udp4 -p 8888
 ```
+
 
 This will open a session inside the container where you can work with PX4, ROS 2, and Gazebo.
 
@@ -43,4 +46,5 @@ If you want to modify the PX4, Micro-XRCE, or `px4_msgs` version, edit the `Dock
 ## Contact
 
 If you have any questions or suggestions, feel free to open an issue or a pull request.
+
 

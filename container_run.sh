@@ -5,9 +5,9 @@ export IMAGE_NAME="px4_ros2"
 
 
 xhost +local:docker;
-export DISPLAY=:0
-PROJECT_DIR="/root";
-PROJECT_DIST="/root";
+
+PROJECT_DIR="${HOME}/work/px4_volume";
+PROJECT_DIST="/home/grvc/ros2_ws/src/external";
 
 if [ "$(docker ps -qaf name=$CONTAINER_NAME)" = "" ]; then
     echo 'Container not found, creating it ...';
@@ -17,8 +17,10 @@ if [ "$(docker ps -qaf name=$CONTAINER_NAME)" = "" ]; then
     --privileged \
     --workdir $PROJECT_DIST \
     --env DISPLAY=$DISPLAY \
+    --network host \
+    --ipc=host \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
-    --volume /mnt/wslg:/mnt/wslg \
+    --mount type=bind,source=$PROJECT_DIR,destination=$PROJECT_DIST \
     $IMAGE_NAME bash;
 
     echo 'Container created.';

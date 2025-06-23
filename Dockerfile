@@ -7,8 +7,7 @@ FROM ubuntu:22.04
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y sudo
-RUN sudo apt-get update
-RUN sudo apt-get upgrade -y
+
 
 # Install basic tools
 RUN sudo apt-get install -y git
@@ -52,7 +51,7 @@ RUN sudo apt-get upgrade -y
  
 RUN sudo apt install -y ros-humble-desktop
 
-RUN sudo echo "source /opt/ros/humble/setup.bash" >> /home/grvc/.bashrc
+RUN sudo echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 RUN sudo /bin/bash -c "source /opt/ros/humble/setup.bash"
 
 RUN sudo apt install -y python3-colcon-common-extensions
@@ -73,12 +72,12 @@ RUN sudo ldconfig /usr/local/lib/
 # Build px4_msgs v.15
 
 RUN sudo apt-get install -y cmake
-RUN mkdir -p /home/grvc/px4msgs_ws/src
-WORKDIR /home/grvc/px4msgs_ws/src
+RUN mkdir -p /home/grvc/ros2_ws/src
+WORKDIR /home/grvc/ros2_ws/src
 RUN git clone https://github.com/PX4/px4_msgs.git -b release/1.15
-WORKDIR /home/grvc/px4msgs_ws
+WORKDIR /home/grvc/ros2_ws
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 
-RUN sudo echo "source /home/grvc/px4msgs_ws/install/setup.bash" >> /home/grvc/.bashrc
+RUN sudo echo "source /home/grvc/ros2_ws/install/setup.bash" >> /root/.bashrc
 
-
+RUN mkdir -p /home/grvc/ros2_ws/src/external
