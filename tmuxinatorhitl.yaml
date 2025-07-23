@@ -7,24 +7,24 @@ windows:
       layout: tiled
       panes:
         - px4:
-            - ./containerWSL_run.sh
+            - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
-            - PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 
+            - PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 1
         - microDDS:
             - sleep 5
-            - ./containerWSL_run.sh
+            - ./container_run.sh
             - sleep 2
-            - MicroXRCEAgent udp4 -p 8888
+            - MicroXRCEAgent serial --dev /dev/ttyUSB0 -b 921600
         - rostest:
             - sleep 5
-            - ./containerWSL_run.sh
+            - ./container_run.sh
             - source /opt/ros/humble/setup.bash
             - sleep 8
             - ros2 topic list 
         - rostest2:
             - sleep 5
-            - ./containerWSL_run.sh
+            - ./container_run.sh
             - source /opt/ros/humble/setup.bash
             - sleep 8
             - ros2 topic list 
