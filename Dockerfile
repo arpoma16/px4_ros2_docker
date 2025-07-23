@@ -56,6 +56,7 @@ RUN sudo /bin/bash -c "source /opt/ros/humble/setup.bash"
 
 RUN sudo apt install -y python3-colcon-common-extensions
 RUN sudo apt install -y python3-rosdep
+RUN apt-get install ros-humble-rosbridge-server
 
 
 # Install Micro-XRCE-DDS-Agent v3.0.1
