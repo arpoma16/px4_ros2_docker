@@ -1,0 +1,31 @@
+name: px4sim
+root: .
+on_project_exit: tmux kill-window
+
+windows:
+  - GCS:
+      layout: tiled
+      panes:
+        - px4:
+            - ./container_run.sh
+            - cd /home/grvc/PX4-Autopilot
+            - sleep 3
+            - PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 
+        - microDDS:
+            - sleep 5
+            - ./container_run.sh
+            - sleep 2
+            - MicroXRCEAgent udp4 -p 8888
+        - rostest:
+            - sleep 5
+            - ./container_run.sh
+            - source /opt/ros/humble/setup.bash
+            - sleep 8
+            - ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+        - rostest2:
+            - sleep 5
+            - ./container_run.sh
+            - source /opt/ros/humble/setup.bash
+            - sleep 8
+            - cd /home/grvc/ros2_ws
+            - colcon build 
