@@ -46,7 +46,7 @@ windows:
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
-            - gz sim -r Tools/simulation/gz/worlds/default.world 
+            - gz sim -r Tools/simulation/gz/worlds/gazebo_world_temp.sdf
         - px4_1:
             - sleep 3
             - ./container_run.sh
