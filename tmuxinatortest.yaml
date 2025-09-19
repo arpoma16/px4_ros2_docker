@@ -4,24 +4,31 @@ on_project_exit: tmux kill-window
 
 windows:
   - GCS:
-      layout: tiled
+      layout: main-vertical
       panes:
-        - px4:
+        - main:
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
-            - PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 
-        - microDDS:
+        - px4:
             - sleep 5
             - ./container_run.sh
-            - sleep 2
-            - MicroXRCEAgent udp4 -p 8888
+            - cd /home/grvc/PX4-Autopilot
+            - sleep 3
+            - PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 2
         - rostest:
             - sleep 5
             - ./container_run.sh
             - source /opt/ros/humble/setup.bash
             - sleep 8
             - ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+        - rosGcs:
+            - sleep 5
+            - ./container_run.sh
+            - source /opt/ros/humble/setup.bash
+            - sleep 8
+            - cd /home/grvc/ros2_ws
+            - ros2 run px4_ros_com ground_command.py
         - rostest2:
             - sleep 5
             - ./container_run.sh
@@ -29,3 +36,9 @@ windows:
             - sleep 8
             - cd /home/grvc/ros2_ws
             - colcon build 
+            - ros2 launch px4_ros_com drone_real.launch.py
+        - microDDS:
+            - sleep 5
+            - ./container_run.sh
+            - sleep 2
+            - MicroXRCEAgent udp4 -p 8888
