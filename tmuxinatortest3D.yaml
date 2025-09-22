@@ -46,28 +46,26 @@ windows:
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
-            - gz sim -r Tools/simulation/gz/worlds/gazebo_world_temp.sdf
+            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:~/.simulation-gazebo/models
+            - gz sim -r ~/.simulation-gazebo/worlds/gazebo_world_temp.sdf
         - px4_1:
             - sleep 3
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
-            - export PX4_HOME_LAT=37.426170
-            - export PX4_HOME_LON=-6.003640
-            - export PX4_HOME_ALT=9.0
             - sleep 3
-            - PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_1 PX4_SIM_MODEL=gz_x500 PX4_HOME_LAT=37.426170 PX4_HOME_LON=-6.003640 PX4_HOME_ALT=9.0 ./build/px4_sitl_default/bin/px4 -i 1
+            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_1 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 
         - px4_2:
             - sleep 3
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
             - sleep 7
-            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,2" PX4_UXRCE_DDS_NS=px4_2 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 2
+            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="-12,-3" PX4_UXRCE_DDS_NS=px4_2 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 1
         - px4_3:
             - sleep 3
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
-            - sleep 7
-            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,4" PX4_SIM_MODEL=gz_x500 PX4_UXRCE_DDS_NS=px4_3 ./build/px4_sitl_default/bin/px4 -i 3
+            - sleep 8
+            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="12,3" PX4_SIM_MODEL=gz_x500 PX4_UXRCE_DDS_NS=px4_3 ./build/px4_sitl_default/bin/px4 -i 2
   - Utils:
       layout: tiled
       panes:  
