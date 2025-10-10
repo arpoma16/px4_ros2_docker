@@ -35,7 +35,6 @@ RUN export LANG=en_US.UTF-8
 
 # These lines are for ROS2 not ask region
 ARG DEBIAN_FRONTEND=noninteractive
-#RUN sudo dpkg-reconfigure locales
  
 RUN sudo apt-get install -y software-properties-common
 RUN sudo add-apt-repository universe
@@ -48,7 +47,6 @@ RUN sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyri
 RUN sudo apt-get update 
 RUN sudo apt-get upgrade -y
 
- 
 RUN sudo apt install -y ros-humble-desktop
 
 RUN sudo echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
@@ -56,7 +54,13 @@ RUN sudo /bin/bash -c "source /opt/ros/humble/setup.bash"
 
 RUN sudo apt install -y python3-colcon-common-extensions
 RUN sudo apt install -y python3-rosdep
-RUN apt-get install ros-humble-rosbridge-server
+
+RUN apt-get install -y ros-humble-rosbridge-server
+
+# install ros GZ
+
+RUN apt install -y ros-humble-ros-gzharmonic
+RUN sudo apt-get update
 
 
 # Install Micro-XRCE-DDS-Agent v3.0.1
@@ -76,6 +80,9 @@ RUN sudo apt-get install -y cmake
 RUN mkdir -p /home/grvc/ros2_ws/src
 WORKDIR /home/grvc/ros2_ws/src
 RUN git clone https://github.com/PX4/px4_msgs.git -b release/1.15
+#RUN git clone https://github.com/gazebosim/ros_gz.git -b humble
+RUN  cd /home/grvc/ros2_ws/src && rosdep install -r --from-paths . -i -y --rosdistro humble
+
 WORKDIR /home/grvc/ros2_ws
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 

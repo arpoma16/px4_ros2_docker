@@ -18,20 +18,20 @@ windows:
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
             - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/.simulation-gazebo/models
-            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 2
+            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500_mono_cam ./build/px4_sitl_default/bin/px4 -i 2
         - rostest:
             - sleep 5
             - ./container_run.sh
             - source /opt/ros/humble/setup.bash
             - sleep 8
-            - ros2 launch rosbridge_server rosbridge_websocket_launch.xml call_services_in_new_thread:=True  send_action_goals_in_new_thread:=True default_call_service_timeout:=5.0 
+            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/.simulation-gazebo/models
+            - ros2 run ros_gz_bridge parameter_bridge /world/default/model/x500_mono_cam_2/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image
         - rosGcs:
             - sleep 5
             - ./container_run.sh
             - source /opt/ros/humble/setup.bash
             - sleep 8
             - cd /home/grvc/ros2_ws
-            - ros2 run px4_ros_com ground_command.py
         - rostest2:
             - sleep 5
             - ./container_run.sh
@@ -39,7 +39,6 @@ windows:
             - sleep 8
             - cd /home/grvc/ros2_ws
             - colcon build 
-            - ros2 launch px4_ros_com drone_real.launch.py
         - microDDS:
             - sleep 5
             - ./container_run.sh
