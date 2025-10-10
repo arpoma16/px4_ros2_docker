@@ -63,7 +63,6 @@ RUN apt-get update
 # mejora de entorno grafico
 RUN apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
 # installar gstreamer
-RUN apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
 
 # paquetes adicionales solicitados
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
@@ -73,6 +72,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends in
         gstreamer1.0-plugins-good \
         gstreamer1.0-plugins-ugly \
         gstreamer1.0-libav \
+        gstreamer1.0-gl \
         libeigen3-dev \
         libgstreamer-plugins-base1.0-dev \
         libimage-exiftool-perl \

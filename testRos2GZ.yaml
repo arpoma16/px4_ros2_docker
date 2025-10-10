@@ -18,5 +18,5 @@ windows:
         - rostest:
             - sleep 5
             - ./container_run_simple.sh
-            - ros2 topic pub /chatter std_msgs/msg/String "data: 'Hi'" --once
-
+            - >
+              ros2 topic pub /chatter std_msgs/msg/String "data: 'Hi'" --once

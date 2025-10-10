@@ -14,7 +14,7 @@ windows:
             - sleep 5
             - ./container_run_simple.sh
             - sleep 3
-            - gz gazebo sensors_demo.sdf
+            - gz sim sensors_demo.sdf
         - camera:
             - sleep 10
             - ./container_run_simple.sh
@@ -27,6 +27,4 @@ windows:
         - rosecho:
             - sleep 5
             - ./container_run_simple.sh
-            - ros2 topic hz /rosimage/image 
-
-
+            - ros2 topic hz /rosimage/image
