@@ -11,7 +11,8 @@ windows:
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
             - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/.simulation-gazebo/models
-            - gz sim -r /root/.simulation-gazebo/worlds/gazebo_world_temp.sdf
+            - #gz sim -r /root/.simulation-gazebo/worlds/gazebo_world_temp.sdf
+            - python3 /home/grvc/PX4-Autopilot/Tools/simulation/gz/simulation-gazebo --world gazebo_world_temp 
         - px4:
             - sleep 5
             - ./container_run.sh

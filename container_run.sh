@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export CONTAINER_NAME="px4_ros2_cont"
-export IMAGE_NAME="px4_ros2"
+export IMAGE_NAME="px4-ros2:v1.0"
 
 
 xhost +local:docker;
