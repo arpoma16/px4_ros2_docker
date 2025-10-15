@@ -3,12 +3,12 @@
 export CONTAINER_NAME="px4_ros2_cont"
 export IMAGE_NAME="px4-ros2:v1.0"
 
-#export XDG_RUNTIME_DIR=/tmp/runtime-root
-#mkdir -p $XDG_RUNTIME_DIR
-#chmod 0700 $XDG_RUNTIME_DIR
-xhost +local:root
+export XDG_RUNTIME_DIR=/tmp/runtime-root
+mkdir -p $XDG_RUNTIME_DIR
+chmod 0700 $XDG_RUNTIME_DIR
 
-#xhost +local:docker;
+#xhost +local:root
+xhost +local:docker;
 
 PROJECT_DIR="${HOME}/work/px4_volume";
 PROJECT_DIST="/home/grvc/ros2_ws/src/external";
