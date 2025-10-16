@@ -7,16 +7,16 @@ windows:
       layout: main-vertical
       panes:
         - main:
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - sleep 3
             - ros2 run ros_gz_bridge parameter_bridge /chatter@std_msgs/msg/String@ignition.msgs.StringMsg
         - px4:
             - sleep 5
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - sleep 3
             - gz topic -e -t /chatter
         - rostest:
             - sleep 5
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - >
               ros2 topic pub /chatter std_msgs/msg/String "data: 'Hi'" --once

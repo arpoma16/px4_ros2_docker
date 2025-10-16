@@ -7,24 +7,24 @@ windows:
       layout: main-vertical
       panes:
         - main:
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - sleep 3
             - ros2 run ros_gz_bridge parameter_bridge /rgbd_camera/image@sensor_msgs/msg/Image@gz.msgs.Image
         - px4:
             - sleep 5
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - sleep 3
             - gz sim sensors_demo.sdf
         - camera:
             - sleep 10
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - sleep 3
             - gz topic -l | grep image
         - rostest:
             - sleep 5
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - ros2 run rqt_image_view rqt_image_view /rgbd_camera/image
         - rosecho:
             - sleep 5
-            - ./container_run_simple.sh
+            - ./container_run_nvidia.sh
             - ros2 topic hz /rosimage/image

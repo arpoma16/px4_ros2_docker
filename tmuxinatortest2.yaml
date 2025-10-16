@@ -2,6 +2,11 @@ name: px4sim
 root: .
 on_project_exit: tmux kill-window
 
+#export GZ_PARTITION=docker_sim_harmonic
+#python3 /home/grvc/PX4-Autopilot/Tools/simulation/gz/simulation-gazebo --dryrun --model_store=/home/grvc/.simulation-gazebo
+#gz sim -r -s -v 4 /root/.simulation-gazebo/worlds/default.sdf
+#export GZ_PARTITION=docker_sim_harmonic
+#export GZ_PARTITION=docker_sim_harmonic
 windows:
   - GCS:
       layout: main-vertical
@@ -10,29 +15,35 @@ windows:
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
             - sleep 3
-            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/.simulation-gazebo/models
-            - #gz sim -r /root/.simulation-gazebo/worlds/gazebo_world_temp.sdf
-            - python3 /home/grvc/PX4-Autopilot/Tools/simulation/gz/simulation-gazebo --world gazebo_world_temp 
+            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/home/grvc/PX4-Autopilot/Tools/simulation/gz/models/
+            - python3 /home/grvc/PX4-Autopilot/Tools/simulation/gz/simulation-gazebo --dryrun
+            - gz sim export /home/grvc/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+        - gzsim:
+            - sleep 15
+            - export GZ_PARTITION=docker_sim_harmonic
+            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/.simulation-gazebo/models
+            - echo "gz sim -g -v 4"
         - px4:
             - sleep 5
             - ./container_run.sh
             - cd /home/grvc/PX4-Autopilot
+            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/home/grvc/PX4-Autopilot/Tools/simulation/gz/models/
+
             - sleep 3
-            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/.simulation-gazebo/models
-            - PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500_mono_cam ./build/px4_sitl_default/bin/px4 -i 2
+            - PX4_UXRCE_DDS_NS=px4_3 PX4_SIM_MODEL=gz_x500_mono_cam ./build/px4_sitl_default/bin/px4 -i 2
         - rostest:
             - sleep 5
             - ./container_run.sh
             - source /opt/ros/humble/setup.bash
-            - sleep 8
-            - export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/.simulation-gazebo/models
-            - ros2 run ros_gz_bridge parameter_bridge /world/default/model/x500_mono_cam_2/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image
+            - sleep 15
+            - ros2 run ros_gz_bridge parameter_bridge /world/default/model/x500_mono_cam_2/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image --ros-args --log-level debug
         - rosGcs:
             - sleep 5
             - ./container_run.sh
             - source /opt/ros/humble/setup.bash
             - sleep 8
             - cd /home/grvc/ros2_ws
+            - ros2 launch rosbridge_server rosbridge_websocket_launch.xml call_services_in_new_thread:=True  send_action_goals_in_new_thread:=True default_call_service_timeout:=5.0 
         - rostest2:
             - sleep 5
             - ./container_run.sh
