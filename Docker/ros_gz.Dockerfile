@@ -51,9 +51,15 @@ RUN apt install -y ros-humble-desktop
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash"
 
-RUN apt install -y python3-colcon-common-extensions
-RUN apt install -y python3-rosdep
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    build-essential \
+    git \
+    python3-colcon-common-extensions \
+    python3-colcon-mixin \
+    python3-rosdep \
+    python3-vcstool 
 
+    
 RUN apt-get install -y ros-humble-rosbridge-server
 
 # install ros GZ

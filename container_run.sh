@@ -1,10 +1,10 @@
 #!/bin/bash
 
 CONTAINER_NAME="px4_ros2_cont"
-IMAGE_NAME="px4-ros2:humble"
+IMAGE_NAME="ros2-px4-ws:humble"
 
 PROJECT_DIR="${HOME}/work/px4_volume";
-PROJECT_DIST="/home/grvc/ros2_ws/src/external";
+PROJECT_DIST="/root/ros2_ws/src/external";
 
 # Configuración X11 para acceso gráfico
 xhost +local:docker;

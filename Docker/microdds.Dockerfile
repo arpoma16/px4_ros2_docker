@@ -2,8 +2,12 @@
 # Micro XRCE-DDS Agent Docker
 #########################################################################################
 
+# Build / runtime base images (can be overridden with --build-arg)
+ARG BUILD_BASE=ubuntu:22.04
+ARG RUNTIME_BASE=ros2-desktop:humble
+
 # Build stage
-FROM ubuntu:22.04 AS build
+FROM ${BUILD_BASE} AS build
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
 
@@ -40,7 +44,7 @@ RUN cd /agent && \
     tar -czvf install.tar.gz  -C install .
 
 # Final user image
-FROM ubuntu:22.04
+FROM ${RUNTIME_BASE}
 WORKDIR /root
 
 # Copy Micro XRCE-DDS Agent build artifacts
