@@ -14,6 +14,7 @@ colcon build --symlink-install
 # powerline fonts for zsh theme
 apt update
 apt install --only-upgrade ros-humble-rosbridge-library ros-humble-rosbridge-server -y
+apt-get install python3-geographiclib -y
 
 cd ~
 git clone https://github.com/powerline/fonts.git
