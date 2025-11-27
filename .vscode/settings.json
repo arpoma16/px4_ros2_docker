@@ -1,0 +1,20 @@
+{
+        "files.associations": {
+        "*.launch": "xml",
+        "*.launch.xml": "xml",
+        "*.test": "xml",
+        "*.urdf.xacro": "xml",
+        "*.urdf": "xml",
+        "model.config": "xml",
+        "*.sdf": "xml",
+        "*.world": "xml"
+    },
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/humble/lib/python3.12/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/humble/lib/python3.12/site-packages"
+    ],
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "cmake.sourceDirectory": "/root/ros2_ws"
+}

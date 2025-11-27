@@ -1,0 +1,27 @@
+services:
+  ros_dev:
+    image: ros2-px4-ws:humble
+    container_name: px4_ros2_cont
+    runtime: nvidia
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+      - "8000:8000"   # API HTTP
+      - "8006:8006"   # WebSocket trajectories
+      - "8083:8083"
+      - "5173:5173"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /home/grvc/work/px4_volume:/root/ros2_ws/src/external
+      - ${XAUTHORITY}:${XAUTHORITY}
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+      - __NV_PRIME_RENDER_OFFLOAD=1
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
+      - XAUTHORITY=${XAUTHORITY}
+    stdin_open: true
+    tty: true

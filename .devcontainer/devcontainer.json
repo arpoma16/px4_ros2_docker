@@ -1,0 +1,63 @@
+{
+    "name": "px4-devcontainer",
+    "initializeCommand": "xhost +local:docker",
+    "postCreateCommand": "sh ./.devcontainer/postCreate.sh",
+    "dockerComposeFile": [
+		"../docker-compose-nv.yml"
+	],
+    "workspaceFolder": "/root/ros2_ws/src/external/",
+    "service": "ros_dev",
+    "shutdownAction": "stopCompose",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils": {
+            "installZsh": true,
+            "installOhMyZsh": true,
+            "installOhMyZshConfig": true,
+            "configureZshAsDefaultShell": true
+        },
+        "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
+            "plugins": "zsh-autosuggestions zsh-syntax-highlighting",
+            "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions.git https://github.com/zsh-users/zsh-syntax-highlighting.git"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions":[
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "twxs.cmake",
+                "donjayamanne.python-extension-pack",
+                "eamodio.gitlens",
+                "Ranch-Hand-Robotics.rde-pack",
+                "redhat.vscode-xml",
+                "smilerobotics.urdf",
+                "tamasfe.even-better-toml",
+                "timonwong.shellcheck",
+                "streetsidesoftware.code-spell-checker",
+                "yzhang.markdown-all-in-one",
+                "GitHub.copilot",
+                "anthropic.claude-code"
+            ],
+            "settings": {
+                "editor.tabSize": 4,
+                "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
+                "terminal.integrated.fontLigatures.enabled": true,
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "/bin/zsh",
+                        "icon": "terminal-ubuntu"
+                    }
+                },
+                "files.associations": {
+                    "*.rviz": "yaml",
+                    "*.srdf": "xml",
+                    "*.urdf": "xml",
+                    "model.config": "xml",
+                    "*.sdf": "xml",
+                    "*.xacro": "xml"
+                }
+            }
+        }
+    }
+}
