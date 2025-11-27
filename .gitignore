@@ -1,0 +1,25 @@
+# Ignore only new files and directories at the root level
+# But track new files inside existing tracked directories
+
+# Ignore everything at root by default
+/*
+
+# But keep these specific files at root
+!.gitignore
+!Dockerfile
+!compose.yaml
+!docker-compose-nv.yml
+!containerWSL_run.sh
+!container_run.sh
+!container_run2.sh
+!container_run_simple.sh
+!rwGZworld.py
+!gazebo_world_temp.sdf
+!README.md
+!LICENSE
+
+# Keep these directories and track NEW files inside them
+!.devcontainer/
+!.vscode/
+!Docker/
+!tmuxinator/
