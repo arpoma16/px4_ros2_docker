@@ -3,10 +3,9 @@
 This repository contains a Dockerfile and a `container.sh` script for generating a container image based on Ubuntu 22.04 with :
 - [ROS 2 Humble](https://docs.ros.org/en/humble/index.html)
 - [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/)
-- [PX4 v1.16-alpha1](https://github.com/PX4/PX4-Autopilot/tree/v1.16.0-alpha1)
+- [PX4 v1.15.4](https://github.com/PX4/PX4-Autopilot/tree/v1.16.0-alpha1)
 - [Micro-XRCE v3.0.1](https://github.com/eProsima/Micro-XRCE-DDS-Agent/tree/v3.0.1)
 - [ROS 2 package `px4_msgs` release 1.15](https://github.com/PX4/px4_msgs/tree/release/1.15)
-- [QGround Control Station](https://qgroundcontrol.com/)
 
 ## Requirements
 
@@ -20,7 +19,7 @@ Before getting started, ensure you have the following installed on your system:
 To build the Docker image, run the following command:
 
 ```bash
-docker build -t px4_ros2 .
+./Docker/createContainer
 ```
 
 This will generate a Docker image with the necessary dependencies for working with PX4 and ROS 2 Humble.
@@ -30,14 +29,17 @@ This will generate a Docker image with the necessary dependencies for working wi
 To start an interactive container based on the generated image, run:
 
 ```bash
-bash ./containerWSL_run.sh 
-PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 1
-MicroXRCEAgent udp4 -p 8888
+bash ./container_run.sh 
 ```
+you can use devcontainers cli .https://github.com/devcontainers/cli
 
-
-This will open a session inside the container where you can work with PX4, ROS 2, and Gazebo.
-
+```
+alias devcontainerhere="devcontainer exec --workspace-folder . bash"
+alias devcontainerhere="devcontainer exec --workspace-folder . zsh"
+alias devcontainerup="devcontainer up --workspace-folder ."
+```
+# use 
+you can review  commands in the folder tmuxinator. you could find a good examples of comands to run with px4
 
 ## Customization
 

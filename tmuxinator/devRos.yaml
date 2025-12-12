@@ -11,7 +11,7 @@ windows:
             - cd .. 
             - devcontainerhere
             - sleep 3
-            - gz sim export /root/PX4-gazebo-models/worlds/default.sdf
+            - gz sim /root/PX4-gazebo-models/worlds/plazaAgua.sdf
         - gzgui:
             - sleep 15
             - export GZ_PARTITION=docker_sim_harmonic
