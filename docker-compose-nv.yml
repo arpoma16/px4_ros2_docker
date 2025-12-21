@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:8080"
       - "9090:9090"
-      - "8000:8000"   # API HTTP
-      - "8006:8006"   # WebSocket trajectories
+      - "8000:8000" # API HTTP
+      - "8006:8006" # WebSocket trajectories
       - "8083:8083"
       - "5173:5173"
       - "14540:14540"
@@ -16,7 +16,7 @@ services:
       - "14550:14550" # PX4 SITL
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/grvc/work/px4_volume:/root/ros2_ws/src/external
+      - ~/work/px4_volume:/root/ros2_ws/src/external
       - ${XAUTHORITY}:${XAUTHORITY}
     environment:
       - DISPLAY=${DISPLAY}
