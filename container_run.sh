@@ -18,11 +18,19 @@ if command -v nvidia-smi &> /dev/null; then
         echo "NVIDIA GPU detected. Using GPU-enabled Docker run."
     fi
 fi
+# detect is wsl or linux
+IS_WSL=$(grep -i "microsoft" /proc/version)
+
 
 # --- Comprobar si el contenedor ya existe o está en ejecución ---
 if [ "$(docker ps -qaf name=$CONTAINER_NAME)" = "" ]; then
     echo 'Container not found, creating it ...';
     
+    if [ -n "$IS_WSL" ]; then
+        export DISPLAY=:0
+        XAUTHORITY=/mnt/wslg/.Xauthority
+    fi
+
     DOCKER_RUN_COMMON=(
         -it
         --name $CONTAINER_NAME
@@ -34,6 +42,11 @@ if [ "$(docker ps -qaf name=$CONTAINER_NAME)" = "" ]; then
         --volume /tmp/.X11-unix:/tmp/.X11-unix:rw
         --mount type=bind,source=$PROJECT_DIR,destination=$PROJECT_DIST
     )
+
+    if [ -n "$IS_WSL" ]; then
+        # Comandos específicos para WSL
+        DOCKER_RUN_COMMON+=(--volume /mnt/wslg:/mnt/wslg )
+    fi
 
     XDG_RUNTIME_DIR=/tmp/runtime-root
     mkdir -p $XDG_RUNTIME_DIR
