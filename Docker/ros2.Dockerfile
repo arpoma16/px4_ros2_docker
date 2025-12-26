@@ -39,3 +39,5 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN rosdep init && \
   rosdep update --rosdistro humble
 
+RUN pip3 uninstall -y numpy opencv-python || true && \
+    pip3 install --no-cache-dir 'numpy<2' 'opencv-python<4.10'
