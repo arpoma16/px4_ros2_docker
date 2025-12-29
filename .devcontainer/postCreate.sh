@@ -14,6 +14,8 @@ colcon build --symlink-install
 # powerline fonts for zsh theme
 apt update
 apt install --only-upgrade ros-humble-rosbridge-library ros-humble-rosbridge-server -y
+apt install ros-humble-ffmpeg-image-transport
+
 apt-get install python3-geographiclib -y
 
 cd ~
