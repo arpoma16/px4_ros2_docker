@@ -4,7 +4,13 @@
 # Ignore everything at root by default
 /*
 
-# But keep these specific files at root
+.vscode/browse.vc.db
+.devcontainer/devcontainer.json
+# Backup temporal si existe
+.devcontainer/.devcontainer.json.active
+*.backup
+
+# keep these specific files at root
 !.gitignore
 !Dockerfile
 !compose.yaml
