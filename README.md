@@ -27,20 +27,46 @@ This will generate a Docker image with the necessary dependencies for working wi
 
 ## Using the Image
 
-This image is developed as a development environment for testing software with ROS2 and PX4. You can run it using the script named container_run.sh or using devcontainers with vscode.
+This image is developed as a development environment for testing software with ROS2 and PX4. You can run it using different methods:
+
+### Option 1: DevContainer with Auto-Detection (Recommended) ⭐
+
+The project includes **automatic GPU detection** that configures the devcontainer appropriately:
 
 ```bash
-bash ./container_run.sh 
-```
-For run with dev container in vscode
-1. install devcontainer externsion
-2. crtl + Shift+P  and  select Devcontainer Reopen in container or Rebuild
+# Auto-detect hardware and configure
+bash .devcontainer/select-config.sh
 
-For get multiple terminal of your container using devcontainer I recomend use devcontainers cli .https://github.com/devcontainers/cli
-
+# Then open in VSCode
+code .
 ```
+
+In VSCode: Press `Ctrl + Shift + P` and select **"Dev Containers: Reopen in Container"**
+
+This will automatically:
+- Detect if you have NVIDIA GPU
+- Configure network in host mode
+- Set up all Docker privileges and configurations
+- Select the appropriate devcontainer configuration
+
+📖 For more details, see [.devcontainer/README.md](.devcontainer/README.md) or [.devcontainer/QUICKSTART.md](.devcontainer/QUICKSTART.md)
+
+### Option 2: Using container_run.sh script
+
+```bash
+bash ./container_run.sh
+```
+
+### Option 3: Manual DevContainer
+
+1. Install devcontainer extension
+2. Press `Ctrl + Shift + P` and select "Dev Containers: Reopen in Container" or "Rebuild"
+
+For multiple terminals in your container using devcontainer, I recommend using devcontainers CLI: https://github.com/devcontainers/cli
+
+```bash
 alias devcontainerhere="devcontainer exec --workspace-folder . bash"
-alias devcontainerhere="devcontainer exec --workspace-folder . zsh"
+alias devcontainerzsh="devcontainer exec --workspace-folder . zsh"
 alias devcontainerup="devcontainer up --workspace-folder ."
 ```
 # Tips 

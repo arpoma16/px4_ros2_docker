@@ -1,4 +1,8 @@
 #!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
 
 CONTAINER_NAME="px4_ros2_cont"
 IMAGE_NAME="ros2-px4-ws:humble"

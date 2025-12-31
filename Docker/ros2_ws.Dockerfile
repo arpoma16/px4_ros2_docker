@@ -25,8 +25,8 @@ RUN echo "source /root/ros2_ws/install/setup.bash" >> /root/.bashrc
 
 # download PX4-gazebo-models
 #RUN cp -r /root/PX4-Autopilot/Tools/simulation/gz /root/PX4-gazebo-models
-RUN git clone https://github.com/PX4/PX4-gazebo-models.git && \
-    cd PX4-gazebo-models && \
+RUN git clone https://github.com/PX4/PX4-gazebo-models.git /root/PX4-gazebo-models && \
+    cd /root/PX4-gazebo-models && \
     git checkout e05f4312d3f28aa621157610584a4870406cb6d3
 # set environment variables for gz
 RUN echo "export GZ_PARTITION=docker_sim_harmonic" >> /root/.bashrc
@@ -36,6 +36,25 @@ RUN echo "export GZ_SIM_SERVER_CONFIG_PATH=/root/PX4-gazebo-models/server.config
 #RUN cd /root/PX4-gazebo-models && \
 #    python3 simulation-gazebo --dryrun
 
+
+# Install mavlink-router dependencies and build from source
+RUN apt-get update && apt-get install -y \
+    meson \
+    ninja-build \
+    pkg-config \
+    gcc \
+    g++ \
+    systemd \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/mavlink-router/mavlink-router.git /tmp/mavlink-router && \
+    cd /tmp/mavlink-router && \
+    git submodule update --init --recursive && \
+    meson setup build . && \
+    ninja -C build && \
+    ninja -C build install && \
+    rm -rf /tmp/mavlink-router
 
 # setup external folder for volumen
 RUN mkdir -p /root/ros2_ws/src/external
