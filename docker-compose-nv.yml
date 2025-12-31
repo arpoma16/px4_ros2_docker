@@ -13,7 +13,10 @@ services:
       - "14540:14540"
       - "14541:14541"
       - "14542:14542"
-      - "14550:14550" # PX4 SITL
+      - "14550:14550/udp" # PX4 SITL UDP
+      - "14550:14550/tcp" # PX4 SITL TCP
+      - "14551:14551/udp" # PX4 SITL UDP Drone 2
+      - "14551:14551/tcp" # PX4 SITL TCP Drone 2
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ~/work/px4_volume:/root/ros2_ws/src/external
