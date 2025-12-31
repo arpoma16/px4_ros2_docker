@@ -1,6 +1,7 @@
 # Docker ROS2 PX4 Environment
 
-This repository contains a Dockerfile and a `container.sh` script for generating a container image based on Ubuntu 22.04 with :
+This repository contains a container image for working with PX4 ROS2 Humble on Ubuntu 22.04 with :
+
 - [ROS 2 Humble](https://docs.ros.org/en/humble/index.html)
 - [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/)
 - [PX4 v1.15.4](https://github.com/PX4/PX4-Autopilot/tree/v1.16.0-alpha1)
@@ -19,26 +20,30 @@ Before getting started, ensure you have the following installed on your system:
 To build the Docker image, run the following command:
 
 ```bash
-./Docker/createContainer
+.createContainer
 ```
 
 This will generate a Docker image with the necessary dependencies for working with PX4 and ROS 2 Humble.
 
-## Running the Container
+## Using the Image
 
-To start an interactive container based on the generated image, run:
+This image is developed as a development environment for testing software with ROS2 and PX4. You can run it using the script named container_run.sh or using devcontainers with vscode.
 
 ```bash
 bash ./container_run.sh 
 ```
-you can use devcontainers cli .https://github.com/devcontainers/cli
+For run with dev container in vscode
+1. install devcontainer externsion
+2. crtl + Shift+P  and  select Devcontainer Reopen in container or Rebuild
+
+For get multiple terminal of your container using devcontainer I recomend use devcontainers cli .https://github.com/devcontainers/cli
 
 ```
 alias devcontainerhere="devcontainer exec --workspace-folder . bash"
 alias devcontainerhere="devcontainer exec --workspace-folder . zsh"
 alias devcontainerup="devcontainer up --workspace-folder ."
 ```
-# use 
+# Tips 
 you can review  commands in the folder tmuxinator. you could find a good examples of comands to run with px4
 
 ## Customization

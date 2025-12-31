@@ -1,11 +1,11 @@
 {
     "name": "px4-devcontainer",
+    "workspaceFolder": "/root/ros2_ws/src/external/",
     "initializeCommand": "xhost +local:docker",
     "postCreateCommand": "sh ./.devcontainer/postCreate.sh",
     "dockerComposeFile": [
 		"../docker-compose-nv.yml"
 	],
-    "workspaceFolder": "/root/ros2_ws/src/external/",
     "service": "ros_dev",
     "shutdownAction": "stopCompose",
     "features": {

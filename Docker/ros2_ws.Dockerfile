@@ -1,8 +1,15 @@
 FROM ros2-px4:humble 
 
 RUN apt install -y libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev
+RUN apt install -y ros-humble-rosbridge-library ros-humble-rosbridge-server
 RUN apt install -y ros-humble-rosbridge-server
 RUN apt install -y ros-humble-ros-gzharmonic
+RUN apt install -y ros-humble-ffmpeg-image-transport
+
+RUN apt-get -y install python3-geographiclib
+
+RUN pip3 uninstall -y numpy opencv-python || true && \
+    pip3 install --no-cache-dir 'numpy<2' 'opencv-python<4.10'
 
 RUN mkdir -p /root/ros2_ws/src
 WORKDIR /root/ros2_ws/src
@@ -17,9 +24,10 @@ RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 RUN echo "source /root/ros2_ws/install/setup.bash" >> /root/.bashrc
 
 # download PX4-gazebo-models
-RUN git clone --depth 1 https://github.com/PX4/PX4-gazebo-models.git /root/PX4-gazebo-models \
-    && cd /root/PX4-gazebo-models \
-    && git checkout 8780afed25bcc9f1b7469d912f9e8bc7ae583ad1
+#RUN cp -r /root/PX4-Autopilot/Tools/simulation/gz /root/PX4-gazebo-models
+RUN git clone https://github.com/PX4/PX4-gazebo-models.git && \
+    cd PX4-gazebo-models && \
+    git checkout e05f4312d3f28aa621157610584a4870406cb6d3
 # set environment variables for gz
 RUN echo "export GZ_PARTITION=docker_sim_harmonic" >> /root/.bashrc
 RUN echo "export GZ_SIM_RESOURCE_PATH=/root/PX4-gazebo-models/models" >> /root/.bashrc

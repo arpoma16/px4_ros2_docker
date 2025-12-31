@@ -12,11 +12,6 @@ colcon build --symlink-install
 #######
 # https://www.josephguadagno.net/2025/03/27/add-and-customize-oh-my-zsh-in-a-linux-development-container
 # powerline fonts for zsh theme
-apt update
-apt install --only-upgrade ros-humble-rosbridge-library ros-humble-rosbridge-server -y
-apt install ros-humble-ffmpeg-image-transport
-
-apt-get install python3-geographiclib -y
 
 cd ~
 git clone https://github.com/powerline/fonts.git

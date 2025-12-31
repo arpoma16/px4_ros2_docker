@@ -15,8 +15,8 @@ RUN apt-get install -y sudo
 
 WORKDIR /root/
 RUN mkdir -p /root/setup/
-ADD ./setup_px4/requirements.txt /root/setup/
-ADD ./setup_px4/ubuntu_setup.sh /root/setup/
+ADD ./Docker/setup_px4/requirements.txt /root/setup/
+ADD ./Docker/setup_px4/ubuntu_setup.sh /root/setup/
 RUN bash /root/setup/ubuntu_setup.sh
 
 RUN git clone -b v1.15.4 https://github.com/PX4/PX4-Autopilot.git --recursive
