@@ -12,6 +12,7 @@
 
 # keep these specific files at root
 !.gitignore
+!CLAUDE.md
 !Dockerfile
 !compose.yaml
 !docker-compose-nv.yml
