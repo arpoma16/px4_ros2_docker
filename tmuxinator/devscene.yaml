@@ -1,7 +1,7 @@
 name: px4sim
 root: .
 on_project_start: devcontainerup || devcontainer up --workspace-folder ..
-on_project_exit: docker stop dev_px4_ros2_cont && tmux kill-window -t px4sim
+on_project_exit: docker stop dev_px4_ros2_cont_nvidia && tmux kill-session -t px4sim
 
 windows:
   - GCS:
