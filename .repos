@@ -1,0 +1,60 @@
+repositories:
+  aerostack2:
+    type: git
+    url: https://github.com/aerostack2/aerostack2.git
+    version: main
+
+  as2_web_gui:
+    type: git
+    url: https://github.com/aerostack2/as2_web_gui.git
+    version: main
+
+  MUAV_GCS_gz:
+    type: git
+    url: https://github.com/arpoma16/MUAV_GCS_gz.git
+    version: main
+
+  MUAV_GCS_interfaces:
+    type: git
+    url: https://github.com/arpoma16/MUAV_GCS_interfaces.git
+    version: main
+
+  MUAV_GCS_offboard:
+    type: git
+    url: https://github.com/arpoma16/MUAV_GCS_offboard.git
+    version: main
+
+  MUAV_psdk_gz:
+    type: git
+    url: https://github.com/arpoma16/MUAV_psdk_gz.git
+    version: main
+
+  MUAV_psdk_offboard:
+    type: git
+    url: https://github.com/arpoma16/MUAV_psdk_offboard.git
+    version: main
+
+  psdk_ros2:
+    type: git
+    url: https://github.com/arpoma16/psdk_ros2.git
+    version: dev/integration
+
+  PX4-gazebo-models:
+    type: git
+    url: https://github.com/PX4/PX4-gazebo-models.git
+    version: main
+
+  px4_msgs:
+    type: git
+    url: https://github.com/PX4/px4_msgs.git
+    version: release/1.15
+
+  px4-ros2-interface-lib:
+    type: git
+    url: https://github.com/Auterion/px4-ros2-interface-lib
+    version: main
+
+  uav_swarm_mission_arch:
+    type: git
+    url: https://github.com/migueltg20/uav_swarm_mission_arch.git
+    version: main

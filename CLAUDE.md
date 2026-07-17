@@ -45,19 +45,28 @@ Para trackear un archivo o carpeta NUEVA en la raíz hay que agregar su regla
 Cada uno es un repo git aparte. NO son submódulos del repo raíz; el raíz los
 ignora a propósito. Estado actual:
 
-| Paquete                   | Remoto                                                    |
-|---------------------------|-----------------------------------------------------------|
-| `aerostack2/`             | github.com/aerostack2/aerostack2                          |
-| `as2_web_gui/`            | github.com/aerostack2/as2_web_gui                         |
-| `MUAV_GCS_gz/`            | github.com/arpoma16/MUAV_GCS_gz                           |
-| `MUAV_GCS_interfaces/`    | github.com/arpoma16/MUAV_GCS_interfaces                   |
-| `MUAV_GCS_offboard/`      | github.com/arpoma16/MUAV_GCS_offboard                     |
-| `MUAV_psdk_offboard/`     | **sin remoto configurado** (solo local, branch `master`) |
-| `psdk_ros2/`              | github.com/arpoma16/psdk_ros2                             |
-| `PX4-manu/`               | github.com/Manuhdezr/PX4-Autopilot                        |
-| `px4_msgs/`               | github.com/PX4/px4_msgs                                   |
-| `px4-ros2-interface-lib/` | github.com/Auterion/px4-ros2-interface-lib               |
-| `uav_swarm_mission_arch/` | github.com/migueltg20/uav_swarm_mission_arch             |
+| Paquete                   | Remoto                                          | Branch actual      |
+|---------------------------|--------------------------------------------------|--------------------|
+| `aerostack2/`             | github.com/aerostack2/aerostack2                  | main               |
+| `as2_web_gui/`            | github.com/aerostack2/as2_web_gui                 | main               |
+| `MUAV_GCS_gz/`            | github.com/arpoma16/MUAV_GCS_gz                   | main               |
+| `MUAV_GCS_interfaces/`    | github.com/arpoma16/MUAV_GCS_interfaces           | main               |
+| `MUAV_GCS_offboard/`      | github.com/arpoma16/MUAV_GCS_offboard             | main               |
+| `MUAV_psdk_gz/`           | github.com/arpoma16/MUAV_psdk_gz                  | main               |
+| `MUAV_psdk_offboard/`     | github.com/arpoma16/MUAV_psdk_offboard            | main               |
+| `psdk_ros2/`              | github.com/arpoma16/psdk_ros2                     | dev/integration    |
+| `PX4-gazebo-models/`      | github.com/PX4/PX4-gazebo-models                  | main               |
+| `px4_msgs/`               | github.com/PX4/px4_msgs                           | release/1.15       |
+| `px4-ros2-interface-lib/` | github.com/Auterion/px4-ros2-interface-lib        | main               |
+| `uav_swarm_mission_arch/` | github.com/migueltg20/uav_swarm_mission_arch      | main               |
+
+El archivo [`.repos`](.repos) (formato [vcstool](https://github.com/dirk-thomas/vcstool))
+define estos mismos repos con URL y branch, para clonarlos todos de una:
+
+```bash
+vcs import . < .repos     # clona los que falten
+vcs pull .                # actualiza los existentes
+```
 
 Directorios en disco que **no** son repos git (código externo sin versionar
 aquí): `Payload-SDK/`, `psdk_doc/`, `uav_media/`.
