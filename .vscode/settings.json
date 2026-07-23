@@ -17,5 +17,9 @@
     ],
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "cmake.sourceDirectory": "/root/ros2_ws",
-    "ROS2.distro": "humble"
+    "ROS2.distro": "humble",
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        "PX4-manu": true
+    }
 }
